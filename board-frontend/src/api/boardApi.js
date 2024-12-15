@@ -22,3 +22,25 @@ export const registerUser = async (userData) => {
       throw error
    }
 }
+
+//로그인
+export const loginUser = async (Credential) => {
+   try {
+      const response = await snsApi.post('/auth/login', Credential)
+      return response
+   } catch (error) {
+      console.error(`API Request 오류 : ${error.message}`)
+      throw error // request할 때 오류 발생시 에러를 registerUser() 함수를 실행한 곳으로 던짐
+   }
+}
+
+//로그아웃
+export const logoutUser = async () => {
+   try {
+      const response = await snsApi.get('/auth/logout')
+      return response
+   } catch (error) {
+      console.error(`API Request 오류 : ${error.message}`)
+      throw error // request할 때 오류 발생시 에러를 registerUser() 함수를 실행한 곳으로 던짐
+   }
+}
