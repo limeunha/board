@@ -22,7 +22,7 @@ module.exports = class Board extends Sequelize.Model {
             modelName: 'Board',
             tableName: 'Boards',
             paranoid: true,
-            // charset,   collate 데이터베이스 새
+            // charset, collate 데이터베이스
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',
          }
