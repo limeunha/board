@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize') //sequelize불러오는
 
 module.exports = class Board extends Sequelize.Model {
    static init(sequelize) {
@@ -22,6 +22,7 @@ module.exports = class Board extends Sequelize.Model {
             modelName: 'Board',
             tableName: 'Boards',
             paranoid: true,
+            // charset,   collate 데이터베이스 새
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',
          }

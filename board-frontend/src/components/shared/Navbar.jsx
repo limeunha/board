@@ -1,10 +1,24 @@
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { logoutUserThunk } from '../../features/authSlice'
 
-const Navbar = ({ isAuthenticated }) => {
-   const handleLogout = useCallback(() => {})
+const Navbar = ({ isAuthenticated, user }) => {
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
+
+   const handleLogout = useCallback(() => {
+      dispatch(logoutUserThunk())
+         .unwrap()
+         .then(() => {
+            navigate('/') //로그아웃 완료 후 메인페이지로 이동
+         })
+         .catch((error) => {
+            alert(error)
+         })
+   }, [dispatch, navigate])
 
    return (
       <AppBar position="static" style={{ backgroundColor: '#fff' }}>
@@ -24,7 +38,7 @@ const Navbar = ({ isAuthenticated }) => {
                   </Link>
                   <Link to="/my" style={{ textDecoration: 'none' }}>
                      <Typography variant="body1" style={{ marginRight: '20px', color: 'black' }}>
-                        님
+                        {user?.nick}님
                      </Typography>
                   </Link>
                   <Button onClick={handleLogout} variant="outlined">
@@ -40,4 +54,5 @@ const Navbar = ({ isAuthenticated }) => {
       </AppBar>
    )
 }
+
 export default Navbar
