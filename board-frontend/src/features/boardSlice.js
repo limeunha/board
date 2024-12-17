@@ -1,4 +1,4 @@
-const BoardSlice = createSlice({
+const boardSlice = createSlice({
    name: 'Boards',
    initialState: {
       posts: [],
@@ -11,33 +11,33 @@ const BoardSlice = createSlice({
    extraReducers: (builder) => {
       // 게시물 등록
       builder
-         .addCase(createPostThunk.pending, (state) => {
+         .addCase(createBoardThunk.pending, (state) => {
             state.loading = true
             state.error = null
          })
-         .addCase(createPostThunk.fulfilled, (state, action) => {
+         .addCase(createBoardThunk.fulfilled, (state, action) => {
             state.loading = false
          })
-         .addCase(createPostThunk.rejected, (state, action) => {
+         .addCase(createBoardThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
          })
       // 게시물 리스트 불러오기
       builder
-         .addCase(fetchPostsThunk.pending, (state) => {
+         .addCase(fetchBoardsThunk.pending, (state) => {
             state.loading = true
             state.error = null
          })
-         .addCase(fetchPostsThunk.fulfilled, (state, action) => {
+         .addCase(fetchBoardsThunk.fulfilled, (state, action) => {
             state.loading = false
             state.posts = action.payload.posts
             state.pagination = action.payload.pagination
          })
-         .addCase(fetchPostsThunk.rejected, (state, action) => {
+         .addCase(fetchBoardsThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
          })
    },
 })
 
-export default BoardSlice.reducer // 여기에서 'BoardSlice' 사용
+export default boardSlice.reducer
