@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize') //sequelize불러오는
+const Sequelize = require('sequelize')
 
 module.exports = class Board extends Sequelize.Model {
    static init(sequelize) {
@@ -22,13 +22,17 @@ module.exports = class Board extends Sequelize.Model {
             modelName: 'Board',
             tableName: 'Boards',
             paranoid: true,
-            // charset, collate 데이터베이스
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',
          }
       )
    }
+
    static associate(db) {
-      db.Board.belongsTo(db.User)
+      // Board는 User에 속함
+      db.Board.belongsTo(db.User) // 수정된 부분: db.Post가 아니라 db.Board로 변경
+
+      // Board와 Hashtag는 다대다 관계
+      db.Board.belongsToMany(db.Hashtag, { through: 'BoardHashtag' })
    }
 }
