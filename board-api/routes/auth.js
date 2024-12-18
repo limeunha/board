@@ -113,6 +113,9 @@ router.get('/logout', isLoggedIn, async (req, res, next) => {
             error: err,
          })
       }
+
+      //로그아웃 성공시 세션에 저장되어 있던 사용자 id를 삭제해주고 아래와 같은 결과를 response
+      //status code를 주지 않으면 기본값은 200(성공)
       res.json({
          success: true,
          message: '로그아웃에 성공했습니다.',
@@ -124,6 +127,7 @@ router.get('/logout', isLoggedIn, async (req, res, next) => {
 router.get('/status', async (req, res, next) => {
    if (req.isAuthenticated()) {
       //로그인이 되었을때
+      // req.user는 passport의 역직렬화 설정에 의해 로그인 되었을때 로그인 한 user 정보를 가져올 수 있다
       res.json({
          isAuthenticated: true,
          user: {

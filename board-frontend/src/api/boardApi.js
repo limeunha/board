@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// 환경 변수로 지정된 기본 URL 사용
 const BASE_URL = process.env.REACT_APP_API_URL
 
 // axios 인스턴스 생성
@@ -8,13 +9,13 @@ const boardApi = axios.create({
    headers: {
       'Content-Type': 'application/json',
    },
-   withCredentials: true, // 세션 쿠키를 요청에 포함
+   withCredentials: true,
 })
 
-// API 응답 처리 함수 (중복 코드 제거)
+// API 응답 처리 함수
 const handleApiResponse = (response) => response.data
 
-// API 에러 처리 함수 (중복 코드 제거)
+// API 에러 처리 함수
 const handleApiError = (error) => {
    const errorMessage = error.response?.data?.message || error.message || '알 수 없는 오류 발생'
    console.error(`API Request 오류: ${errorMessage}`)
@@ -61,60 +62,60 @@ export const checkAuthStatus = async () => {
    }
 }
 
-// 포스트 등록
-export const createPost = async (postData) => {
+// 보드 등록
+export const createBoard = async (boardData) => {
    try {
       const config = {
          headers: {
-            'Content-Type': 'multipart/form-data', // 파일 전송시 반드시 지정
+            'Content-Type': 'multipart/form-data',
          },
       }
-      const response = await boardApi.post('/post', postData, config)
+      const response = await boardApi.post('/board', boardData, config)
       return handleApiResponse(response)
    } catch (error) {
       handleApiError(error)
    }
 }
 
-// 포스트 수정
-export const updatePost = async (id, postData) => {
+// 보드 수정
+export const updateBoard = async (id, boardData) => {
    try {
       const config = {
          headers: {
-            'Content-Type': 'multipart/form-data', // 파일 전송시 반드시 지정
+            'Content-Type': 'multipart/form-data',
          },
       }
-      const response = await boardApi.put(`/post/${id}`, postData, config)
+      const response = await boardApi.put(`/board/${id}`, boardData, config)
       return handleApiResponse(response)
    } catch (error) {
       handleApiError(error)
    }
 }
 
-// 포스트 삭제
-export const deletePost = async (id) => {
+// 보드 삭제
+export const deleteBoard = async (id) => {
    try {
-      const response = await boardApi.delete(`/post/${id}`)
+      const response = await boardApi.delete(`/board/${id}`)
       return handleApiResponse(response)
    } catch (error) {
       handleApiError(error)
    }
 }
 
-// 특정 포스트 가져오기
-export const getPostById = async (id) => {
+// 특정 보드 가져오기
+export const getBoardById = async (id) => {
    try {
-      const response = await boardApi.get(`/post/${id}`)
+      const response = await boardApi.get(`/board/${id}`)
       return handleApiResponse(response)
    } catch (error) {
       handleApiError(error)
    }
 }
 
-// 전체 포스트 가져오기 (페이징)
-export const getPosts = async (page) => {
+// 전체 보드 가져오기 (페이징)
+export const getBoards = async (page) => {
    try {
-      const response = await boardApi.get(`/post?page=${page}`)
+      const response = await boardApi.get(`/boards?page=${page}`)
       return handleApiResponse(response)
    } catch (error) {
       handleApiError(error)

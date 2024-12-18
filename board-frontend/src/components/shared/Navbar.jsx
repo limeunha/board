@@ -1,3 +1,5 @@
+// src/components/Navbar.js
+
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
 import { Link, useNavigate } from 'react-router-dom'
@@ -13,10 +15,11 @@ const Navbar = ({ isAuthenticated, user }) => {
       dispatch(logoutUserThunk())
          .unwrap()
          .then(() => {
-            navigate('/') //로그아웃 완료 후 메인페이지로 이동
+            navigate('/') // 로그아웃 후 메인 페이지로 이동
          })
          .catch((error) => {
-            alert(error)
+            console.error('로그아웃 실패:', error)
+            alert('로그아웃 중 문제가 발생했습니다.')
          })
    }, [dispatch, navigate])
 

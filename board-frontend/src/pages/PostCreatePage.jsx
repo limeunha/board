@@ -3,7 +3,7 @@ import PostForm from '../components/post/PostForm'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
-import { createPostThunk } from '../features/boardSlice'
+import { createBoardThunk } from '../features/boardSlice'
 
 const PostCreatePage = () => {
    const navigate = useNavigate()
@@ -11,7 +11,7 @@ const PostCreatePage = () => {
 
    const handleSubmit = useCallback(
       (postData) => {
-         dispatch(createPostThunk(postData))
+         dispatch(createBoardThunk(postData))
             .unwrap()
             .then(() => {
                navigate('/') //게시물 등록 후 메인페이지로 이동

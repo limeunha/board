@@ -29,10 +29,7 @@ module.exports = class Board extends Sequelize.Model {
    }
 
    static associate(db) {
-      // Board는 User에 속함
-      db.Board.belongsTo(db.User) // 수정된 부분: db.Post가 아니라 db.Board로 변경
-
-      // Board와 Hashtag는 다대다 관계
-      db.Board.belongsToMany(db.Hashtag, { through: 'BoardHashtag' })
+      db.Board.belongsTo(db.User)
+      db.Board.belongsToMany(db.Hashtag, { through: 'PostHashtag' })
    }
 }

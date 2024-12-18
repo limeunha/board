@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loginUserThunk } from '../../features/authSlice'
 
 const Login = () => {
-   const [email, setEmail] = useState('') // 이메일 상태
-   const [password, setPassword] = useState('') // 비밀번호 상태
+   const [email, setEmail] = useState('')
+   const [password, setPassword] = useState('')
    const dispatch = useDispatch()
    const navigate = useNavigate()
    const { loading, error } = useSelector((state) => state.auth)
@@ -15,11 +15,16 @@ const Login = () => {
       (e) => {
          e.preventDefault()
          if (email.trim() && password.trim()) {
-            //이메일과 패스워드가 둘다 입력이 되어있다면
             dispatch(loginUserThunk({ email, password }))
                .unwrap()
-               .then(() => navigate('/')) //로그인 성공시 메인페이지로 이동
-               .catch((error) => console.error('로그인 실패:', error)) //로그인 실패시 에러 출력
+               .then(() => {
+                  navigate('/')
+               })
+               .catch((err) => {
+                  console.error('로그인 실패:', err)
+               })
+         } else {
+            console.error('이메일과 비밀번호를 모두 입력해주세요!')
          }
       },
       [dispatch, email, password, navigate]
@@ -41,7 +46,7 @@ const Login = () => {
             '로그인'
          ),
       [loading]
-   ) // 로딩 상태가 변경될 때만 버튼 내용이 다시 렌더링됨
+   )
 
    return (
       <Container maxWidth="sm">
