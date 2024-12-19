@@ -52,10 +52,10 @@ export const fetchBoardsThunk = createAsyncThunk('boards/fetchboards', async (pa
    }
 })
 
-const postSlice = createSlice({
+const boardSlice = createSlice({
    name: 'boards',
    initialState: {
-      posts: [],
+      boards: [],
       post: null,
       pagination: null,
       loading: false,
@@ -143,4 +143,4 @@ const postSlice = createSlice({
    },
 })
 
-export default postSlice.reducer
+export default boardSlice.reducer

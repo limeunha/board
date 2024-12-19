@@ -10,6 +10,7 @@ const cors = require('cors') //cors 미들웨어 -> ★api 서버는 반드시 �
 //라우터 및 기타 모듈 불러오기
 const indexRouter = require('./routes')
 const authRouter = require('./routes/auth')
+const boardRouter = require('./routes/board')
 const { sequelize } = require('./models')
 const passportConfig = require('./passport')
 
@@ -60,6 +61,7 @@ app.use(passport.session()) //Passport와 생성해둔 세션 연결
 //라우터 등록
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
+app.use('/board', boardRouter)
 
 //잘못된 라우터 경로 처리
 app.use((req, res, next) => {

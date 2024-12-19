@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { checkAuthStatusThunk } from './features/authSlice'
 import PostCreatePage from './pages/PostCreatePage'
+import PostEditPage from './pages/PostEditPage'
 
 function App() {
    const dispatch = useDispatch()
@@ -26,6 +27,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/posts/create" element={<PostCreatePage />} />
+            <Route path="/posts/edit/:id" element={<PostEditPage />} />
          </Routes>
       </>
    )
