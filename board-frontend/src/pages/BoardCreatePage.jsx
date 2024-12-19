@@ -1,11 +1,10 @@
 import { Container } from '@mui/material'
-import PostForm from '../components/post/BoardForm'
-// import { useNavigate } from 'react-router-dom'
+import BoardForm from '../components/post/BoardForm'
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 import { createBoardThunk } from '../features/boardSlice'
 
-const PostCreatePage = () => {
+const BoardCreatePage = () => {
    // const navigate = useNavigate()
    const dispatch = useDispatch()
 
@@ -28,9 +27,9 @@ const PostCreatePage = () => {
    return (
       <Container maxWidth="md">
          <h1>게시물 등록</h1>
-         <PostForm onSubmit={handleSubmit} />
+         <BoardForm onSubmit={handleSubmit} />
       </Container>
    )
 }
 
-export default PostCreatePage
+export default BoardCreatePage

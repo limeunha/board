@@ -7,8 +7,8 @@ import LoginPage from './pages/LoginPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { checkAuthStatusThunk } from './features/authSlice'
-import PostCreatePage from './pages/PostCreatePage'
-import PostEditPage from './pages/PostEditPage'
+import BoardCreatePage from './pages/BoardCreatePage'
+import BoardEditPage from './pages/BoardEditPage'
 
 function App() {
    const dispatch = useDispatch()
@@ -26,8 +26,8 @@ function App() {
             <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/posts/create" element={<PostCreatePage />} />
-            <Route path="/posts/edit/:id" element={<PostEditPage />} />
+            <Route path="/posts/create" element={<BoardCreatePage />} />
+            <Route path="/posts/edit/:id" element={<BoardEditPage />} />
          </Routes>
       </>
    )

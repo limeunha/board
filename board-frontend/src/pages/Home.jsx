@@ -2,7 +2,7 @@ import { Container, Typography, Pagination, Stack } from '@mui/material'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBoardsThunk } from '../features/boardSlice'
-import boardItem from '../components/board/BoardItem'
+import BoardItem from '../components/post/BoardItem'
 
 const Home = ({ isAuthenticated, user }) => {
    const [page, setPage] = useState(1)

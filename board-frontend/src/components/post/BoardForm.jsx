@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react'
 import { TextField, Button, Box } from '@mui/material'
 
 // 등록, 수정 폼 컴포넌트
-const PostForm = ({ onSubmit, initialValues = {} }) => {
+const BoardForm = ({ onSubmit, initialValues = {} }) => {
    const [imgUrl, setImgUrl] = useState(initialValues.img ? process.env.REACT_APP_API_URL + initialValues.img : '') // 이미지 경로(파일명 포함)
    const [imgFile, setImgFile] = useState(null) // 이미지 파일 객체
    const [content, setContent] = useState(initialValues.content || '') //게시물 내용
@@ -96,4 +96,4 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
    )
 }
 
-export default PostForm
+export default BoardForm

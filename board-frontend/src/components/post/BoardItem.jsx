@@ -9,7 +9,7 @@ import dayjs from 'dayjs' //날짜 시간 포맷해주는 패키지
 import { useCallback } from 'react'
 import { deleteBoardThunk } from '../../features/boardSlice'
 
-const PostItem = ({ post, isAuthenticated, user }) => {
+const BoardItem = ({ board, isAuthenticated, user }) => {
    const dispatch = useDispatch()
 
    //게시물 삭제 실행
@@ -31,26 +31,26 @@ const PostItem = ({ post, isAuthenticated, user }) => {
 
    return (
       <Card style={{ margin: '20px 0' }}>
-         <CardMedia sx={{ height: 240 }} image={`${process.env.REACT_APP_API_URL}${post.img}`} title={post.content} />
+         <CardMedia sx={{ height: 240 }} image={`${process.env.REACT_APP_API_URL}${board.img}`} title={board.content} />
          <CardContent>
-            <Link to={`/my/${post.User.id}`} style={{ textDecoration: 'none' }}>
-               <Typography sx={{ color: 'primary.main' }}>@{post.User.nick} </Typography>
+            <Link to={`/my/${board.User.id}`} style={{ textDecoration: 'none' }}>
+               <Typography sx={{ color: 'primary.main' }}>@{board.User.nick} </Typography>
             </Link>
-            <Typography>{dayjs(post.createdAt).format('YYYY-MM-DD HH:mm:ss')}</Typography>
-            <Typography>{post.content}</Typography>
+            <Typography>{dayjs(board.createdAt).format('YYYY-MM-DD HH:mm:ss')}</Typography>
+            <Typography>{board.content}</Typography>
          </CardContent>
          <CardActions>
             <Button size="small" color="primary">
                <FavoriteBorderIcon fontSize="small" />
             </Button>
-            {isAuthenticated && post.User.id === user.id && (
+            {isAuthenticated && board.User.id === user.id && (
                <Box sx={{ p: 2 }}>
-                  <Link to={`/posts/edit/${post.id}`}>
+                  <Link to={`/posts/edit/${board.id}`}>
                      <IconButton aria-label="edit" size="small">
                         <EditIcon fontSize="small" />
                      </IconButton>
                   </Link>
-                  <IconButton aria-label="delete" size="small" onClick={() => onClickDelete(post.id)}>
+                  <IconButton aria-label="delete" size="small" onClick={() => onClickDelete(board.id)}>
                      <DeleteIcon fontSize="small" />
                   </IconButton>
                </Box>
@@ -60,4 +60,4 @@ const PostItem = ({ post, isAuthenticated, user }) => {
    )
 }
 
-export default PostItem
+export default BoardItem
