@@ -62,7 +62,7 @@ const BoardForm = ({ onSubmit, initialValues = {} }) => {
          //수정할때는 PostEditPage.jsx 의 handleSubmit() 함수를 실행시킴
          onSubmit(formData) //formData 객체를 전송
       },
-      [content, hashtags, imgFile, onSubmit]
+      [content, hashtags, imgFile, onSubmit, initialValues.id]
    )
 
    // state 변경시 등록/수정 버튼 재연산 방지

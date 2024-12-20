@@ -88,13 +88,13 @@ router.post('/', isLoggedIn, upload.single('img'), async (req, res) => {
 //게시물 수정 localhost:8000/post/:id
 router.put('/:id', isLoggedIn, upload.single('img'), async (req, res) => {
    try {
-      const Board = await Board.findOne({ where: { id: req.params.id, UserId: req.user.id } })
-      if (!Board) {
+      const board = await Board.findOne({ where: { id: req.params.id, UserId: req.user.id } })
+      if (!board) {
          return res.status(404).json({ success: false, message: '게시물을 찾을 수 없습니다.' })
       }
 
       //게시물 수정
-      await Board.update({
+      await board.update({
          content: req.body.content, //수정된 내용
          img: req.file ? `/${req.file.filename}` : board.img, //수정된 이미지 파일이 있으면 교체 없으면 기존 값 유지
       })
@@ -110,7 +110,7 @@ router.put('/:id', isLoggedIn, upload.single('img'), async (req, res) => {
             )
          )
 
-         await Board.setHashtags(result.map((r) => r[0])) //기존 해시태그를 새 해시태그로 교체
+         await board.setHashtags(result.map((r) => r[0])) //기존 해시태그를 새 해시태그로 교체
       }
 
       //업데이트 된 게시물 다시 조회
@@ -144,8 +144,8 @@ router.put('/:id', isLoggedIn, upload.single('img'), async (req, res) => {
 router.delete('/:id', isLoggedIn, async (req, res) => {
    try {
       // 삭제할 게시물 존재 여부 확인
-      const Board = await Board.findOne({ where: { id: req.params.id, UserId: req.user.id } })
-      if (!Board) {
+      const board = await Board.findOne({ where: { id: req.params.id, UserId: req.user.id } })
+      if (!board) {
          return res.status(404).json({ success: false, message: '게시물을 찾을 수 없습니다.' })
       }
 
@@ -227,7 +227,7 @@ router.get('/', async (req, res) => {
          success: true,
          boards, // boards: boards
          pagination: {
-            totalPosts: count, // 전체 게시물 수
+            totalBoards: count, // 전체 게시물 수
             currentPage: page, // 현재 페이지
             totalPages: Math.ceil(count / limit), // 총 페이지 수
             limit, // 페이지당 게시물 수
