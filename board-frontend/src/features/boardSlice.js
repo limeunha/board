@@ -18,7 +18,7 @@ export const updateBoardThunk = createAsyncThunk('boards/updateBoard', async (da
       const response = await updateBoard(id, boardData)
       return response.data.board
    } catch (error) {
-      return rejectWithValue(error.response?.data?.message || '게시물 삭제 실패')
+      return rejectWithValue(error.response?.data?.message || '게시물 수정 실패')
    }
 })
 
@@ -26,7 +26,7 @@ export const updateBoardThunk = createAsyncThunk('boards/updateBoard', async (da
 export const deleteBoardThunk = createAsyncThunk('boards/deleteBoard', async (id, { rejectWithValue }) => {
    try {
       const response = await deleteBoard(id)
-      return id // 삭제된 게시물의 ID를 반환
+      return id
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '게시물 삭제 실패')
    }
